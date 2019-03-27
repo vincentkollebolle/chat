@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
 import { ActivatedRoute,Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter,distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -28,6 +28,15 @@ export class ChatComponent implements OnInit {
     
     this.io = this.chatService.onMessage()
     .pipe(filter((message:Message)=>message.message.trim().length>0))
+    .pipe(
+      distinctUntilChanged(
+        (previous: any, current: any) => {
+          if (current != null && previous != null) {
+              return previous.message === current.message;
+          }
+          return true;
+        })
+    )
     .subscribe((message: Message) => {
       this.messages.push(message);
     });
