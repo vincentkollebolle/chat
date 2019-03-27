@@ -1,0 +1,15 @@
+.panel{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5px;
+    padding:5px;
+    width:98%;
+    border:1px lightgray solid;
+    border-radius: 3px;
+    background-color: #dee2e6;
+    background-color: lightgray;
+}
+
+li{
+    list-style-type: none;
+}

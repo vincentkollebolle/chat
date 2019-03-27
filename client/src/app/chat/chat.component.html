@@ -1,19 +1,31 @@
-<li *ngFor="let msg of messages">
-        {{msg}}
-</li>
-<div *ngIf="this.chatService.isLoggin()">
-    Message : <input [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
-    <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button>
-    <br/>
-    <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
-</div>
-<div *ngIf="!this.chatService.isLoggin()">
-    Nom d'utilisateur : <input [(ngModel)]="pseudo" (keyup)="onLoginKey($event)"> 
-    <button type="button" class="btn btn-primary" (click)="login()">Login</button>
-</div>
-Qui est la : <br/>
-<li *ngFor="let user of users">
-        {{user}}
-</li>
 
+<div class="panel panelLogin" *ngIf="!this.chatService.isLoggin()">
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+        <div class="input-group-text">Username</div>
+        </div>
+        <input type="text" class="form-control" id="pseudo" [(ngModel)]="pseudo" placeholder="Username">
+        <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+    </div>
+</div>
+
+<div class="panel" *ngIf="this.chatService.isLoggin()">        
+        <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
+</div>
+
+<div class="panel">
+    Messages
+    <li *ngFor="let msg of messages"><i class="fa fa-envelope"></i> {{msg}}</li>
+</div>
+
+<div class="panel"  *ngIf="this.chatService.isLoggin()">
+    <label>Message : </label><input class="form-control" [(ngModel)]="message" (keyup)="onKey($event)"> 
+    <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button> 
+    
+</div>
+
+<div class="panel" >
+Qui est la : <br/>
+<li *ngFor="let user of users"><i class="fa fa-user"></i> {{user}}</li>
+</div>
 
