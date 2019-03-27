@@ -4,12 +4,12 @@
     </div>
     <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">               
         <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-            Messages
+            <span [translate]="'messages'"></span>
             <li *ngFor="let msg of messages">
                 <i class="fa fa-envelope"></i> &nbsp;
                 <span *ngIf="msg.status===0"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> : <span [innerHTML]="msg.message"></span></span>
-                <span *ngIf="msg.status===1" [ngStyle]="{'color':'green'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se connecter</span>
-                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se déconnecter (<span [innerHTML]="msg.message"></span>)</span>
+                <span *ngIf="msg.status===1" [ngStyle]="{'color':'green'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> <span [translate]="'connected'"></span></span>
+                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> <span [translate]="'disconnected'"></span> (<span [innerHTML]="msg.message"></span>)</span>
             </li>
         </div>
         
@@ -17,7 +17,7 @@
             <div class="input-group">
                 <textarea class="form-control" placeholder="Message" id="message" rows="3" [(ngModel)]="message" #messageArea></textarea>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="sendMessage(message)">Envoyer</button>
+                    <button class="btn btn-outline-secondary" type="button" (click)="sendMessage(message)" [translate]="'send'"></button>
                 </div>
             </div>
         </div>
