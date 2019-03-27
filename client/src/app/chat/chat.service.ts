@@ -9,14 +9,16 @@ import { Message } from './message';
 export class ChatService {
   socket: any;
   loggin: boolean = false;
-  pseudo : string;
+  pseudo : string= '';
 
   constructor() { 
   }
 
   initSocket(){
-    //this.socket = socketIo('http://2a1bc46f.ngrok.io');
-    this.socket = socketIo('http://localhost:3000');
+
+    //this.socket = socketIo('http://localhost:3000');
+    this.socket = socketIo('http://16c0563f.ngrok.io');
+
   }
 
   login(pseudo: string){
@@ -28,6 +30,7 @@ export class ChatService {
   logout(pseudo: string){
     this.socket.emit('logout', pseudo);
     this.loggin = false;
+    this.pseudo = '';
   }
 
   public sendMessage(message: string){
