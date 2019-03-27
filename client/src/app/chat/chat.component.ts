@@ -55,6 +55,7 @@ export class ChatComponent implements OnInit {
   
   sendMessage(){
     if ( this.pseudo && this.message ) {
+      this.message = this.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
       this.chatService.sendMessage(this.message);
       this.message = '';
     }

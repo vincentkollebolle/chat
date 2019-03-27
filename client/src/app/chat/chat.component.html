@@ -21,15 +21,15 @@
             Messages
             <li *ngFor="let msg of messages">
                 <i class="fa fa-envelope"></i> &nbsp;
-                <span *ngIf="msg.status===0"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> : {{msg.message}}</span>
+                <span *ngIf="msg.status===0"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> : <span [innerHTML]="msg.message"></span></span>
                 <span *ngIf="msg.status===1" [ngStyle]="{'color':'green'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se connecter</span>
-                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se déconnecter ({{msg.message}})</span>
+                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se déconnecter (<span [innerHTML]="msg.message"></span>)</span>
             </li>
         </div>
         
         <div class="panel bg-light" *ngIf="this.chatService.isLoggin()">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Message" [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
+                <textarea class="form-control" placeholder="Message" id="message" rows="3" [(ngModel)]="message"></textarea>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="sendMessage(message)">Envoyer</button>
                 </div>
