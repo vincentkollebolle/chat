@@ -11,6 +11,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatSplashscreenComponent } from './chat-splashscreen/chat-splashscreen.component';
 import { ChatUsersComponent } from './chat-users/chat-users.component';
 
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ChatUsersComponent } from './chat-users/chat-users.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
