@@ -59,7 +59,12 @@ export class ChatComponent implements OnInit {
   }
 
   // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
-  onKey(event: any) {
+  onLoginKey(event: any) {
+    if ( event.which == 13 ) { this.login(); }
+  }
+
+  // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
+  onMessageKey(event: any) {
     if ( event.which == 13 ) { this.sendMessage(); }
   }
 
