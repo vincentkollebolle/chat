@@ -5,7 +5,7 @@ import { UsersComponent } from './users/users.component';
 import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'user', pathMatch: 'full' }, 
+  { path: '', redirectTo: 'chat', pathMatch: 'full' }, 
   { path: 'user', component: UsersComponent },
   { path: 'user/:id', component: UserEditComponent },
   { path: 'chat', component: ChatComponent }
