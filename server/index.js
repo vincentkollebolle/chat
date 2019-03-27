@@ -1,7 +1,6 @@
 const port = '3000'
 var app = require('express')();
 var http = require('http').Server(app);
-var path = require('path');
 var io = require('socket.io')(http,{
     handlePreflightRequest: (req, res) => {
         const headers = {
@@ -48,6 +47,12 @@ io.on('connection', function(socket){
     // Il quitte le navigateur
     socket.on('disconnect', function(){
       console.log('User is disconnected');
+      // On vérifie s'il a oublié de se deconnecter
+      if (users.includes(socket.pseudo)){
+        users.pop(socket.pseudo);
+        io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo'});
+        io.emit('allUsers', users);
+      }
     });
   });
 
