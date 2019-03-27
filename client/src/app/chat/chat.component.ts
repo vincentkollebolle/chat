@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
 import { ActivatedRoute,Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-chat',
@@ -9,6 +11,9 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+
+  //recupere l'element #messageInput du DOM
+  @ViewChild('messageArea') messageArea: ElementRef;
 
   message: string;
   pseudo: string;
@@ -22,6 +27,7 @@ export class ChatComponent implements OnInit {
 
     
     this.io = this.chatService.onMessage()
+    .pipe(filter((message:Message)=>message.message.trim().length>0))
     .subscribe((message: Message) => {
       this.messages.push(message);
     });
@@ -60,6 +66,15 @@ export class ChatComponent implements OnInit {
       this.chatService.sendMessage(this.message);
       this.message = '';
     }
+  }
+
+  /**
+   * concetene le pseudo eu debut de la zone de saisie puis focus cette zone
+   * @param pseudo 
+   */
+  concatPseudo(pseudo){
+    this.message = "@" + pseudo + " ";
+    this.messageArea.nativeElement.focus()
   }
 
   // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
