@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -15,30 +16,34 @@ export class ChatComponent implements OnInit {
   messages: string[] = [];
   users: string[] = [];
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService, private route : ActivatedRoute,) { }
 
   ngOnInit() {
-    this.chatService.initSocket();
 
+    
     this.io = this.chatService.onMessage()
     .subscribe((message: Message) => {
       this.messages.push(message.pseudo+' : '+ message.message);
     });
-
+    
     this.io = this.chatService.onNewUser()
     .subscribe((user: string)=> {
       this.messages.push(user+' vient de se connecter')
     });
-
+    
     this.io = this.chatService.onAllUsers()
     .subscribe((user: string[])=> {
       this.users = user;
     });
-
+    
     this.io = this.chatService.onLogout()
     .subscribe((message: Message)=> {
       this.messages.push(message.pseudo +' vient de se déconnecter ('+message.message+')')
     });
+
+    // Récupère le nom du user
+    this.pseudo = this.route.snapshot.paramMap.get('id');
+    console.log(this.pseudo);
   }
 
   login(){

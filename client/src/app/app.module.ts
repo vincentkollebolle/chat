@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatSplashscreenComponent } from './chat-splashscreen/chat-splashscreen.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ChatComponent } from './chat/chat.component';
     UserComponent,
     UserEditComponent,
     UsersComponent,
-    ChatComponent
+    ChatComponent,
+    ChatSplashscreenComponent
   ],
   imports: [
     BrowserModule,
