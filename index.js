@@ -2,7 +2,17 @@ const port = '3000'
 var app = require('express')();
 var http = require('http').Server(app);
 var path = require('path');
-var io = require('socket.io')(http);
+var io = require('socket.io')(http,{
+    handlePreflightRequest: (req, res) => {
+        const headers = {
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true
+        };
+        res.writeHead(200, headers);
+        res.end();
+	}
+});
 var users = [];
 
 // Quelqu'un rejoint le socket
