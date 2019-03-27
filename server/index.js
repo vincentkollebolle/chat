@@ -42,7 +42,7 @@ io.on('connection', function(socket){
     // Il se deconnecte mais reste sur la page (socket toujours présent)
     socket.on('logout', function (message) {
       // On le supprime de la liste des utilisateurs
-      users.pop(socket.pseudo);
+      users.splice(users.indexOf(socket.pseudo), 1);
 	  // Si le message est vide, on en met un par défaut
 	  if ( !message ) { message = 'Kenavo!'; }
       // On envoie un message aux autres utilisateurs pour prévenir la déconnexion
@@ -55,7 +55,7 @@ io.on('connection', function(socket){
       console.log('User is disconnected');
       // On vérifie s'il a oublié de se deconnecter
       if (users.includes(socket.pseudo)){
-        users.pop(socket.pseudo);
+        users.splice(users.indexOf(socket.pseudo), 1);
         io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo!', status: 2});
         io.emit('allUsers', users);
       }
