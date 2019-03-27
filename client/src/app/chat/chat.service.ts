@@ -9,6 +9,7 @@ import { Message } from './message';
 export class ChatService {
   socket: any;
   loggin: boolean = false;
+  pseudo : string;
 
   constructor() { 
   }
@@ -21,6 +22,7 @@ export class ChatService {
   login(pseudo: string){
     this.socket.emit('newUser', pseudo);
     this.loggin = true;
+    this.pseudo = pseudo;
   }
 
   logout(pseudo: string){

@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
         </div>
         
-        <div class="panel bg-light">
+        <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             Messages
             <li *ngFor="let msg of messages">
                 <i class="fa fa-envelope"></i> &nbsp;
@@ -27,9 +27,13 @@
             </li>
         </div>
         
-        <div class="panel"  *ngIf="this.chatService.isLoggin()">
-            <label>Message : </label><input class="form-control" [(ngModel)]="message" (keyup)="onKey($event)"> 
-            <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button> 
+        <div class="panel bg-light" *ngIf="this.chatService.isLoggin()">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Message" [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="sendMessage(message)">Envoyer</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

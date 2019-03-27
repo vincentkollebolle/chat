@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -15,16 +16,16 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   users: string[] = [];
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService, private route : ActivatedRoute,) { }
 
   ngOnInit() {
-    this.chatService.initSocket();
 
+    
     this.io = this.chatService.onMessage()
     .subscribe((message: Message) => {
       this.messages.push(message);
     });
-
+    
     this.io = this.chatService.onNewUser()
     .subscribe((message: Message)=> {
       this.messages.push(message)
@@ -34,6 +35,9 @@ export class ChatComponent implements OnInit {
     .subscribe((message: Message)=> {
       this.messages.push(message)
     });
+
+    // Récupère le nom du user
+    this.pseudo = this.chatService.pseudo;
   }
 
   login(){
