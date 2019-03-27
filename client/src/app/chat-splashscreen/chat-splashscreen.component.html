@@ -1,11 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="input-group">
-      <p> Nom d'utilisateur : <input [(ngModel)]="pseudo" class="form-control" pattern="[a-zA-Z0-9]{1,32}" (keyup)="onMessageKey($event)" /> </p>
+      <div class="input-group">
+        <p> <span [translate]="'username'"></span> : 
+        <input [(ngModel)]="pseudo" pattern="[a-zA-Z0-9]{1,32}" #pseudopat="ngModel" required/></p>
+        <div *ngIf="pseudopat.errors?.pattern || pseudopat.errors?.required"> 
+            <p> pseudo non valide.</p>
+        </div>
+        <div class="input-group">
+            <p> <span [translate]="'server'"></span> : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
+        </div>
+        <div *ngIf="!pseudopat.errors?.pattern && !pseudopat.errors?.required">
+         <button type="button" class="btn btn-primary" (click)="login()" [translate]="'connect'" ></button>
+        </div>
     </div>
-    <div class="input-group">
-        <p> Serveur : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
     </div>
-    <button type="button" class="btn btn-primary" (click)="login()" >Login</button>
-  </div>
 </div>

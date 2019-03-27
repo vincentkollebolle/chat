@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ChatService } from '../chat/chat.service';
 
 @Component({
@@ -10,6 +10,9 @@ export class ChatUsersComponent implements OnInit {
 
   //permet d'echanger des données avec le parent
   @Output() selectUser: EventEmitter<any> = new EventEmitter();
+  @Output() logout: EventEmitter<any> = new EventEmitter();
+
+  @Input() currentUser: string;
 
   io: any;
   users: string[] = [];
@@ -29,5 +32,9 @@ export class ChatUsersComponent implements OnInit {
    */
   onSelectUser(user: string) {
     this.selectUser.emit(user);
+  }
+
+  onLogout(){
+    this.logout.emit(this.currentUser);
   }
 }
