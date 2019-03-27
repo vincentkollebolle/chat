@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="input-group">
-      <p> Nom d'utilisateur : <input [(ngModel)]="pseudo" class="form-control" pattern="[a-zA-Z0-9]{1,32}" (keyup)="onMessageKey($event)" /> </p>
+      <p> <span [translate]="'username'"></span> : <input [(ngModel)]="pseudo" class="form-control" pattern="[a-zA-Z0-9]{1,32}" (keyup)="onMessageKey($event)" /> </p>
     </div>
     <div class="input-group">
-        <p> Serveur : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
+        <p> <span [translate]="'server'"></span> : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
     </div>
-    <button type="button" class="btn btn-primary" (click)="login()" >Login</button>
+    <button type="button" class="btn btn-primary" (click)="login()" [translate]="'connect'" ></button>
   </div>
 </div>

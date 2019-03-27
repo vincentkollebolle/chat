@@ -14,11 +14,29 @@ export class AppComponent {
     translate.use('fr');
 
     translate.setTranslation('fr', {
-      title: 'Chat'
+      title: 'Chat',
+      server: 'Serveur',
+      username: 'Nom d\'utilisateur',
+      message: 'Message',
+      messages: 'Messages',
+      connect: 'Login',
+      disconnect: 'Déconnexion',
+      send: 'Envoyer',
+      connected: ' vient de se connecter',
+      disconnected: ' vient de se déconnecter'
     });
     
     translate.setTranslation('br', {
-      title: 'Kaoz'
+      title: 'Kaoz',
+      server: 'Mevel',
+      username: 'Anv',
+      message: 'Kannad',
+      messages: 'Kannadou',
+      connect: 'Kevrañ',
+      disconnect: 'Disgevrañ',
+      send: 'Kaz',
+      connected: ' kevr',
+      disconnected: ' diskevr'
     });
 
   }
