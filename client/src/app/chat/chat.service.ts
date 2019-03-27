@@ -9,6 +9,7 @@ import { Message } from './message';
 export class ChatService {
   socket: any;
   loggin: boolean = false;
+  pseudo : string;
 
   constructor() { 
   }
@@ -21,6 +22,7 @@ export class ChatService {
   login(pseudo: string){
     this.socket.emit('newUser', pseudo);
     this.loggin = true;
+    this.pseudo = pseudo;
   }
 
   logout(pseudo: string){
@@ -38,9 +40,9 @@ export class ChatService {
     });
   }
 
-  public onNewUser(): Observable<string> {
-    return new Observable<string>(observer => {
-      this.socket.on('newUser', (data: string) => observer.next(data));
+  public onNewUser(): Observable<Message> {
+    return new Observable<Message>(observer => {
+      this.socket.on('newUser', (data: Message) => observer.next(data));
     });
   }
 

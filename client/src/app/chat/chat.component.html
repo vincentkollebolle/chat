@@ -19,11 +19,16 @@
         
         <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             Messages
-            <li *ngFor="let msg of messages"><i class="fa fa-envelope"></i> {{msg}}</li>
+            <li *ngFor="let msg of messages">
+                <i class="fa fa-envelope"></i> &nbsp;
+                <span *ngIf="msg.status===0"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> : {{msg.message}}</span>
+                <span *ngIf="msg.status===1" [ngStyle]="{'color':'green'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se connecter</span>
+                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> vient de se déconnecter ({{msg.message}})</span>
+            </li>
         </div>
         
         <div class="panel"  *ngIf="this.chatService.isLoggin()">
-            <label>Message : </label><input class="form-control" [(ngModel)]="message" (keyup)="onKey($event)"> 
+            <label>Message : </label><input class="form-control" [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
             <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button> 
         </div>
     </div>
