@@ -13,7 +13,8 @@ export class ChatComponent implements OnInit {
   message: string;
   pseudo: string;
   io: any;
-  messages: string[] = [];
+  messages: Message[] = [];
+  users: string[] = [];
 
   constructor(private chatService: ChatService, private route : ActivatedRoute,) { }
 
@@ -22,17 +23,17 @@ export class ChatComponent implements OnInit {
     
     this.io = this.chatService.onMessage()
     .subscribe((message: Message) => {
-      this.messages.push(message.pseudo+' : '+ message.message);
+      this.messages.push(message);
     });
     
     this.io = this.chatService.onNewUser()
-    .subscribe((user: string)=> {
-      this.messages.push(user+' vient de se connecter')
+    .subscribe((message: Message)=> {
+      this.messages.push(message)
     });
 
     this.io = this.chatService.onLogout()
     .subscribe((message: Message)=> {
-      this.messages.push(message.pseudo +' vient de se déconnecter ('+message.message+')')
+      this.messages.push(message)
     });
 
     // Récupère le nom du user
