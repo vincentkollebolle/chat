@@ -2,7 +2,7 @@
         {{msg}}
 </li>
 <div *ngIf="this.chatService.isLoggin()">
-    Message : <input [(ngModel)]="message"> 
+    Message : <input [(ngModel)]="message" (keyup)="onKey($event)"> 
     <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button>
     <br/>
     <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
