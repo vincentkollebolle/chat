@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
-      <div class="">
-        <p> Nom d'utilisateur : <input [(ngModel)]="pseudo" pattern="[a-zA-Z0-9]{1,32}" #pseudopat="ngModel"/></p>
+      <div class="input-group">
+        <p> Nom d'utilisateur : 
+        <input [(ngModel)]="pseudo" pattern="[a-zA-Z0-9]{1,32}" #pseudopat="ngModel" required/></p>
         <div *ngIf="pseudopat.errors?.pattern"> 
             pseudo not valid.
-        </div> 
+        </div>
+        <div class="input-group">
+            <p> Serveur : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
+        </div>
         <div *ngIf="!pseudopat.errors?.pattern">
          <button type="button" class="btn btn-primary" (click)="login()" >Login</button>
         </div>
