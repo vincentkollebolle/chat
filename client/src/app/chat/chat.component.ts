@@ -42,7 +42,9 @@ export class ChatComponent implements OnInit {
   }
 
   login(){
-    this.chatService.login(this.pseudo);
+    if ( this.pseudo ) {
+      this.chatService.login(this.pseudo);
+    }
   }
 
   logout(){
