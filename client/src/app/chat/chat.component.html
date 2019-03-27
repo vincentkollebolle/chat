@@ -20,10 +20,10 @@
         <div class="panel bg-light">
             Messages
             <li *ngFor="let msg of messages">
-                <i class="fa fa-envelope"></i> 
-                <p *ngIf="msg.status=0">{{msg.pseudo}} : {{msg.message}}</p>
-                <p *ngIf="msg.status=1" [ngStyle]="{'color:green'}">{{msg.pseudo}} vient de se connecter</p>
-                <p *ngIf="msg.status=2" [ngStyle]="{'color:red'}">{{msg.pseudo}} vient de se déconnecter ({{msg.message}})</p>
+                <i class="fa fa-envelope"></i> &nbsp;
+                <span *ngIf="msg.status===0">{{msg.pseudo}} : {{msg.message}}</span>
+                <span *ngIf="msg.status===1" [ngStyle]="{'color':'green'}">{{msg.pseudo}} vient de se connecter</span>
+                <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}">{{msg.pseudo}} vient de se déconnecter ({{msg.message}})</span>
             </li>
         </div>
         
