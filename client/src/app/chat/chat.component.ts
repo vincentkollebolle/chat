@@ -52,8 +52,15 @@ export class ChatComponent implements OnInit {
   }
   
   sendMessage(){
-    this.chatService.sendMessage(this.message);
-    this.message = '';
+    if ( this.pseudo && this.message ) {
+      this.chatService.sendMessage(this.message);
+      this.message = '';
+    }
+  }
+
+  // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
+  onKey(event: any) {
+    if ( event.which == 13 ) { this.sendMessage(); }
   }
 
 }
