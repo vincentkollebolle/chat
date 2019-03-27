@@ -13,7 +13,6 @@ export class ChatComponent implements OnInit {
   pseudo: string;
   io: any;
   messages: string[] = [];
-  users: string[] = [];
 
   constructor(private chatService: ChatService) { }
 
@@ -28,11 +27,6 @@ export class ChatComponent implements OnInit {
     this.io = this.chatService.onNewUser()
     .subscribe((user: string)=> {
       this.messages.push(user+' vient de se connecter')
-    });
-
-    this.io = this.chatService.onAllUsers()
-    .subscribe((user: string[])=> {
-      this.users = user;
     });
 
     this.io = this.chatService.onLogout()
