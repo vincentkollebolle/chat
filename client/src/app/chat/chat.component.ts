@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
 import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -22,6 +23,7 @@ export class ChatComponent implements OnInit {
 
     
     this.io = this.chatService.onMessage()
+    .pipe(filter((message:Message)=>message.message.trim().length>0))
     .subscribe((message: Message) => {
       this.messages.push(message);
     });
