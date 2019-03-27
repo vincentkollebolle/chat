@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="input-group">
-        <p> Nom d'utilisateur : <input class="form-control" [(ngModel)]="pseudo"> </p>
+      <p> Nom d'utilisateur : <input [(ngModel)]="pseudo" class="form-control" (keyup)="onMessageKey($event)" /> </p>
     </div>
     <div class="input-group">
         <p> Serveur : <input class="form-control" [(ngModel)]="serviceUrl"> </p>
