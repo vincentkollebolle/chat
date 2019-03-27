@@ -26,21 +26,21 @@ io.on('connection', function(socket){
       // On ajoute l'utilisateur à la liste des utilisateurs présents
       users.push(pseudo);
       // On envoie un message aux autres utilisateurs avec son pseudo
-      io.emit('newUser', pseudo);
+      io.emit('newUser', {pseudo: pseudo, message: '', status: 1});
       // On met à jour la liste des utilisateurs présents pour tous le monde
       io.emit('allUsers', users);
     })
     // Il envoie un message
     socket.on('message', function (message) {
       // On envoie le message aux autres utilisateurs avec son pseudo récupéré dans la session du serveur
-      io.emit('message', {pseudo: socket.pseudo, message: message});
+      io.emit('message', {pseudo: socket.pseudo, message: message, status: 0});
     });
     // Il se deconnecte mais reste sur la page (socket toujours présent)
     socket.on('logout', function (message) {
       // On le supprime de la liste des utilisateurs
       users.pop(socket.pseudo);
       // On envoie un message aux autres utilisateurs pour prévenir la déconnexion
-      io.emit('logout', {pseudo: socket.pseudo, message: message});
+      io.emit('logout', {pseudo: socket.pseudo, message: message, status: 2});
       // On mmet à jour la liste des utilisateurs présents pour tout le monde
       io.emit('allUsers', users);
     }); 
@@ -50,7 +50,7 @@ io.on('connection', function(socket){
       // On vérifie s'il a oublié de se deconnecter
       if (users.includes(socket.pseudo)){
         users.pop(socket.pseudo);
-        io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo'});
+        io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo!'});
         io.emit('allUsers', users);
       }
     });
