@@ -30,11 +30,6 @@ export class ChatComponent implements OnInit {
       this.messages.push(message)
     });
 
-    this.io = this.chatService.onAllUsers()
-    .subscribe((user: string[])=> {
-      this.users = user;
-    });
-
     this.io = this.chatService.onLogout()
     .subscribe((message: Message)=> {
       this.messages.push(message)
