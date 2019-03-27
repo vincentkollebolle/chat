@@ -10,14 +10,13 @@ export class ChatService {
   socket: any;
   loggin: boolean = false;
   pseudo : string= '';
+  serviceUrl : string;
 
   constructor() { 
   }
 
   initSocket(){
-
-    //this.socket = socketIo('http://localhost:3000');
-    this.socket = socketIo('http://16c0563f.ngrok.io');
+    this.socket = socketIo( this.serviceUrl );
 
   }
 

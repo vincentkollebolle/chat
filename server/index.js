@@ -21,10 +21,14 @@ io.on('connection', function(socket){
     io.emit('allUsers', users);
     // Il demande à rejoindre le chat avec un pseudo
     socket.on('newUser', function (pseudo){
+      if (users.includes(pseudo)){
+        pseudo = pseudo + Math.floor(Math.random() * 100) + 1;
+      }
       // On stock le pseudo sur la session du serveur
       socket.pseudo = pseudo;
       // On ajoute l'utilisateur à la liste des utilisateurs présents
       users.push(pseudo);
+      io.emit('resUser', true);
       // On envoie un message aux autres utilisateurs avec son pseudo
       io.emit('newUser', {pseudo: pseudo, message: '', status: 1});
       // On met à jour la liste des utilisateurs présents pour tous le monde

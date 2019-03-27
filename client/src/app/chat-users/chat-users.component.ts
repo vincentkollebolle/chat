@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChatService } from '../chat/chat.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { ChatService } from '../chat/chat.service';
   styleUrls: ['./chat-users.component.css']
 })
 export class ChatUsersComponent implements OnInit {
+
+  //permet d'echanger des données avec le parent
+  @Output() selectUser: EventEmitter<any> = new EventEmitter();
 
   io: any;
   users: string[] = [];
@@ -20,8 +23,11 @@ export class ChatUsersComponent implements OnInit {
     });
   }
 
-  openSideNav() : void {
-    
+  /**
+   * Emition du nom de l'utilisateur si lequel on a cliqué au parent
+   * @param user 
+   */
+  onSelectUser(user: string) {
+    this.selectUser.emit(user);
   }
-
 }
