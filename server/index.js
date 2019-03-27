@@ -21,10 +21,14 @@ io.on('connection', function(socket){
     io.emit('allUsers', users);
     // Il demande à rejoindre le chat avec un pseudo
     socket.on('newUser', function (pseudo){
+      if (users.includes(pseudo)){
+        pseudo = pseudo + Math.floor(Math.random() * 100) + 1;
+      }
       // On stock le pseudo sur la session du serveur
       socket.pseudo = pseudo;
       // On ajoute l'utilisateur à la liste des utilisateurs présents
       users.push(pseudo);
+      io.emit('resUser', true);
       // On envoie un message aux autres utilisateurs avec son pseudo
       io.emit('newUser', {pseudo: pseudo, message: '', status: 1});
       // On met à jour la liste des utilisateurs présents pour tous le monde
@@ -38,7 +42,7 @@ io.on('connection', function(socket){
     // Il se deconnecte mais reste sur la page (socket toujours présent)
     socket.on('logout', function (message) {
       // On le supprime de la liste des utilisateurs
-      users.pop(socket.pseudo);
+      users.splice(users.indexOf(socket.pseudo), 1);
 	  // Si le message est vide, on en met un par défaut
 	  if ( !message ) { message = 'Kenavo!'; }
       // On envoie un message aux autres utilisateurs pour prévenir la déconnexion
@@ -51,7 +55,7 @@ io.on('connection', function(socket){
       console.log('User is disconnected');
       // On vérifie s'il a oublié de se deconnecter
       if (users.includes(socket.pseudo)){
-        users.pop(socket.pseudo);
+        users.splice(users.indexOf(socket.pseudo), 1);
         io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo!', status: 2});
         io.emit('allUsers', users);
       }
