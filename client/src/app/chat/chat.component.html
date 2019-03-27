@@ -3,18 +3,28 @@
         <app-chat-users></app-chat-users>
     </div>
     <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">
-        <li *ngFor="let msg of messages">
-                {{msg}}
-        </li>
-        <div *ngIf="this.chatService.isLoggin()">
-            Message : <input [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
-            <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button>
-            <br/>
-            <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
+        <div class="panel panelLogin bg-light" *ngIf="!this.chatService.isLoggin()">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                <div class="input-group-text">Username</div>
+                </div> 
+                <input type="text" class="form-control" id="pseudo" [(ngModel)]="pseudo" placeholder="Username">
+                <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+            </div>
         </div>
-        <div *ngIf="!this.chatService.isLoggin()">
-            Nom d'utilisateur : <input [(ngModel)]="pseudo" (keyup)="onLoginKey($event)"> 
-            <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+        
+        <div class="panel bg-light" *ngIf="this.chatService.isLoggin()">        
+                <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
+        </div>
+        
+        <div class="panel bg-light">
+            Messages
+            <li *ngFor="let msg of messages"><i class="fa fa-envelope"></i> {{msg}}</li>
+        </div>
+        
+        <div class="panel"  *ngIf="this.chatService.isLoggin()">
+            <label>Message : </label><input class="form-control" [(ngModel)]="message" (keyup)="onKey($event)"> 
+            <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button> 
         </div>
     </div>
 </div>
