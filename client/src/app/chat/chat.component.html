@@ -1,12 +1,8 @@
 <div class="row">
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <app-chat-users (selectUser)="concatPseudo($event)"></app-chat-users>
+        <app-chat-users [currentUser]="pseudo" (logout)="logout()" (selectUser)="concatPseudo($event)"></app-chat-users>
     </div>
-    <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">        
-        <div class="panel bg-light" *ngIf="this.chatService.isLoggin()">        
-                <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
-        </div>
-        
+    <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">               
         <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             Messages
             <li *ngFor="let msg of messages">
