@@ -37,8 +37,7 @@ export class ChatComponent implements OnInit {
     });
 
     // Récupère le nom du user
-    this.pseudo = this.route.snapshot.paramMap.get('id');
-    console.log(this.pseudo);
+    this.pseudo = this.chatService.pseudo;
   }
 
   login(){

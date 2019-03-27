@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'user', component: UsersComponent },
   { path: 'connection', component: ChatSplashscreenComponent },
   { path: 'user/:id', component: UserEditComponent },
-  { path: 'chat/:id', component: ChatComponent }
+  { path: 'chat', component: ChatComponent }
 ];
 
 @NgModule({
