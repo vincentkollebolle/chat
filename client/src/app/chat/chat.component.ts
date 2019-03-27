@@ -42,6 +42,7 @@ export class ChatComponent implements OnInit {
   }
 
   logout(){
+    if ( !this.message ) { this.message = 'Kenavo!'; }
     this.chatService.logout(this.message);
     this.pseudo = '';
     this.message = '';
