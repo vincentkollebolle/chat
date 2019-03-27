@@ -39,6 +39,8 @@ io.on('connection', function(socket){
     socket.on('logout', function (message) {
       // On le supprime de la liste des utilisateurs
       users.pop(socket.pseudo);
+	  // Si le message est vide, on en met un par défaut
+	  if ( !message ) { message = 'Kenavo!'; }
       // On envoie un message aux autres utilisateurs pour prévenir la déconnexion
       io.emit('logout', {pseudo: socket.pseudo, message: message});
       // On mmet à jour la liste des utilisateurs présents pour tout le monde
