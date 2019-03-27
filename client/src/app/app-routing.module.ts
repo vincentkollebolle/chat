@@ -4,13 +4,14 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatSplashscreenComponent } from './chat-splashscreen/chat-splashscreen.component';
+import { ChatGuard } from './chat.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'connection', pathMatch: 'full' }, 
   { path: 'user', component: UsersComponent },
-  { path: 'connection', component: ChatSplashscreenComponent },
+  { path: 'connection', component: ChatSplashscreenComponent},
   { path: 'user/:id', component: UserEditComponent },
-  { path: 'chat', component: ChatComponent }
+  { path: 'chat', canActivate : [ChatGuard], component: ChatComponent }
 ];
 
 @NgModule({

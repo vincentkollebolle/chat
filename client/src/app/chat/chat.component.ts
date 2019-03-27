@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 import { Message } from './message';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-chat',
@@ -17,7 +18,7 @@ export class ChatComponent implements OnInit {
   messages: Message[] = [];
   users: string[] = [];
 
-  constructor(private chatService: ChatService, private route : ActivatedRoute,) { }
+  constructor(private chatService: ChatService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
 
@@ -53,6 +54,7 @@ export class ChatComponent implements OnInit {
     this.chatService.logout(this.message);
     this.pseudo = '';
     this.message = '';
+    this.router.navigate(['/connection']);
   }
   
   sendMessage(){
