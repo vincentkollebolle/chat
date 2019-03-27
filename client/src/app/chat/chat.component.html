@@ -17,7 +17,7 @@
                 <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
         </div>
         
-        <div class="panel bg-light">
+        <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             Messages
             <li *ngFor="let msg of messages"><i class="fa fa-envelope"></i> {{msg}}</li>
         </div>
