@@ -52,7 +52,7 @@ io.on('connection', function(socket){
       // On vérifie s'il a oublié de se deconnecter
       if (users.includes(socket.pseudo)){
         users.pop(socket.pseudo);
-        io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo!'});
+        io.emit('logout', {pseudo: socket.pseudo, message: 'Kenavo!', status: 2});
         io.emit('allUsers', users);
       }
     });
