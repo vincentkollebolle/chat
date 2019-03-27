@@ -1,0 +1,8 @@
+<button *ngFor="let user of this.userService.getUsers()"
+(click)="onSelect(user)"
+[ngStyle]="{'font-size': setSize(user)}"
+type="button" class="btn btn-primary">
+<span>{{user.prenom}} {{user.nom}}</span>
+</button>
+<hr>
+<app-user [user]="userService.getCurrentUser()"></app-user>

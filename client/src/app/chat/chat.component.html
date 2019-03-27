@@ -1,0 +1,19 @@
+<li *ngFor="let msg of messages">
+        {{msg}}
+</li>
+<div *ngIf="this.chatService.isLoggin()">
+    Message : <input [(ngModel)]="message"> 
+    <button type="button" class="btn btn-primary" (click)="sendMessage()">Envoyer</button>
+    <br/>
+    <button type="button" class="btn btn-primary" (click)="logout()">Deconnexion</button>
+</div>
+<div *ngIf="!this.chatService.isLoggin()">
+    Nom d'utilisateur : <input [(ngModel)]="pseudo"> 
+    <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+</div>
+Qui est la : <br/>
+<li *ngFor="let user of users">
+        {{user}}
+</li>
+
+

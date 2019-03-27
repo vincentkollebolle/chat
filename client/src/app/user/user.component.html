@@ -1,0 +1,18 @@
+<div *ngIf="user">
+    Bonjour {{user.prenom}}
+    <ul>
+      <li>
+        id : {{user.id}}
+      </li>
+      <li>
+        nom : {{user.nom}}
+      </li>
+      <li>
+        prenom : {{user.prenom}}
+      </li>
+      <li>
+        age : {{user.age}}
+      </li>
+    </ul>
+    <button type="button" class="btn btn-primary" routerLink="/user/{{user.id}}">Editer</button>
+</div>
