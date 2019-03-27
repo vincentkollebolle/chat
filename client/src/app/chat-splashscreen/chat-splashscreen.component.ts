@@ -18,7 +18,6 @@ export class ChatSplashscreenComponent implements OnInit {
 
   login(){
     this.chatService.login(this.pseudo);
-    
     this.router.navigateByUrl('\chat');
   }
 }
