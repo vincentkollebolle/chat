@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
       <div class="">
-        <p> Nom d'utilisateur : <input [(ngModel)]="pseudo"> </p>
+        <p> Nom d'utilisateur : <input [(ngModel)]="pseudo" (keyup)="onMessageKey($event)" /> </p>
         <button type="button" class="btn btn-primary" (click)="login()" >Login</button>
     </div>
     </div>

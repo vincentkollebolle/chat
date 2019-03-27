@@ -15,8 +15,10 @@ export class ChatService {
   }
 
   initSocket(){
-    this.socket = socketIo('http://16c0563f.ngrok.io');
+
     //this.socket = socketIo('http://localhost:3000');
+    this.socket = socketIo('http://16c0563f.ngrok.io');
+
   }
 
   login(pseudo: string){

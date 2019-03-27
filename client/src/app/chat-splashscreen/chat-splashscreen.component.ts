@@ -20,4 +20,9 @@ export class ChatSplashscreenComponent implements OnInit {
     this.chatService.login(this.pseudo);
     this.router.navigateByUrl('\chat');
   }
+
+   // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
+   onMessageKey(event: any) {
+    if ( event.which == 13 ) { this.login(); }
+  }
 }
