@@ -1,5 +1,7 @@
 <li *ngFor="let msg of messages">
-        {{msg}}
+        <p *ngIf="msg.status=0">{{msg.pseudo}} : {{msg.message}}</p>
+        <p *ngIf="msg.status=1" [ngStyle]="{'color:green'}">{{msg.pseudo}} vient de se connecter</p>
+        <p *ngIf="msg.status=2" [ngStyle]="{'color:red'}">{{msg.pseudo}} vient de se déconnecter ({{msg.message}})</p>
 </li>
 <div *ngIf="this.chatService.isLoggin()">
     Message : <input [(ngModel)]="message" (keyup)="onMessageKey($event)"> 
