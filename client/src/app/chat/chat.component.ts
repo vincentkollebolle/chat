@@ -11,7 +11,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 export class ChatComponent implements OnInit {
 
   //recupere l'element #messageInput du DOM
-  @ViewChild('messageInput') messageInput: ElementRef;
+  @ViewChild('messageArea') messageArea: ElementRef;
 
   message: string;
   pseudo: string;
@@ -59,6 +59,7 @@ export class ChatComponent implements OnInit {
   
   sendMessage(){
     if ( this.pseudo && this.message ) {
+      this.message = this.message.replace(/(?:\r\n|\r|\n)/g, '<br>');
       this.chatService.sendMessage(this.message);
       this.message = '';
     }
@@ -70,7 +71,7 @@ export class ChatComponent implements OnInit {
    */
   concatPseudo(pseudo){
     this.message = "@" + pseudo + " ";
-    this.messageInput.nativeElement.focus()
+    this.messageArea.nativeElement.focus()
   }
 
   // Vérifie les touches claviers utilisées (pour envoyer avec Entrée).
