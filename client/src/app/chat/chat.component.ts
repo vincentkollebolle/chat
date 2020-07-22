@@ -17,16 +17,12 @@ export class ChatComponent implements OnInit {
 
   message: string;
   pseudo: string;
-  io: any;
   messages: Message[] = [];
-  users: string[] = [];
 
   constructor(private chatService: ChatService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
-
-    
-    this.io = this.chatService.onMessage()
+    this.chatService.onMessage()
     .pipe(filter((message:Message)=>message.message.trim().length>0))
     .pipe(
       distinctUntilChanged(
@@ -41,12 +37,12 @@ export class ChatComponent implements OnInit {
       this.messages.push(message);
     });
     
-    this.io = this.chatService.onNewUser()
+    this.chatService.onNewUser()
     .subscribe((message: Message)=> {
       this.messages.push(message)
     });
 
-    this.io = this.chatService.onLogout()
+    this.chatService.onLogout()
     .subscribe((message: Message)=> {
       this.messages.push(message)
     });
