@@ -15,9 +15,10 @@ export class ChatComponent implements OnInit {
   //recupere l'element #messageInput du DOM
   @ViewChild('messageArea') messageArea: ElementRef;
 
-  message: string;
+  message: string = '';
   pseudo: string;
   messages: Message[] = [];
+  MAXLENGTH: number = 30;
 
   constructor(private chatService: ChatService, private route : ActivatedRoute, private router : Router) { }
 

@@ -2,7 +2,7 @@
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
         <app-chat-users [currentUser]="pseudo" (logout)="logout()" (selectUser)="concatPseudo($event)"></app-chat-users>
     </div>
-    <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">               
+    <div class="col-xs-6 col-sm-8 col-md-9 col-lg-9">
         <div class="panel panel-message bg-light" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <span [translate]="'messages'"></span>
             <li *ngFor="let msg of messages">
@@ -12,14 +12,31 @@
                 <span *ngIf="msg.status===2" [ngStyle]="{'color':'red'}"><span [ngStyle]="{'font-weight':'bold'}">{{msg.pseudo}}</span> <span [translate]="'disconnected'"></span> (<span [innerHTML]="msg.message"></span>)</span>
             </li>
         </div>
-        
+
         <div class="panel bg-light" *ngIf="this.chatService.isLoggin()">
             <div class="input-group">
-                <textarea class="form-control" placeholder="Message" id="message" rows="3" [(ngModel)]="message" #messageArea></textarea>
+                <textarea
+                    class="form-control"
+                    placeholder="Message"
+                    id="message"
+                    rows="3"
+                    [(ngModel)]="message"
+                    #messageArea
+                    [class.error]="message.length > MAXLENGTH"
+                >
+                </textarea>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="sendMessage(message)" [translate]="'send'"></button>
+                    <button 
+                        class="btn btn-outline-secondary" 
+                        type="button" 
+                        (click)="sendMessage(message)" 
+                        [translate]="'send'"
+                        [disabled]="message.length > MAXLENGTH">
+                    </button>
                 </div>
             </div>
         </div>
+        <p>Caractères utilisés : {{message.length}}/{{MAXLENGTH}}</p>
+        <p *ngIf="message.length > MAXLENGTH" [class.error-msg]="message.length > MAXLENGTH">Votre message est trop long !</p>
     </div>
 </div>

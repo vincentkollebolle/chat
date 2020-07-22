@@ -18,3 +18,15 @@
 li{
     list-style-type: none;
 }
+textarea.error {
+    box-sizing: border-box;
+    border: 2px solid red;
+}
+ 
+.error-msg {
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+    display: inline;
+    padding: 10px;
+}
